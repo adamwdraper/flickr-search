@@ -12,21 +12,24 @@ define([
     var View = Backbone.View.extend({
             collection: new Collection(),
             listeners: {
+                'app change:keyword': 'fetch',
                 'collection sync': 'renderResults'
             },
             events: {},
-            initialize: function () {
-                this.listenTo(this.app.get('keyword', {
-                    model: true
-                }), 'change:value', this.fetch);
-            },
+            initialize: function () {},
             render: function () {
 
                 return this;
             },
-            fetch: function () {
-                this.collection.fetch();
-            },
+            fetch: _.debounce(function () {
+                var keyword = this.app.get('keyword');
+
+                this.collection.options.keyword = keyword;
+
+                if (keyword) {
+                    this.collection.fetch();
+                }
+            }, 500),
             renderResults: function () {
                 var html = '';
 
