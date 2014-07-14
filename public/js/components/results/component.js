@@ -6,14 +6,15 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    './collection',
+    './photos',
     'template!./template.html'
-], function ($, _, Backbone, Collection, template) {
+], function ($, _, Backbone, Photos, template) {
     var View = Backbone.View.extend({
-            collection: new Collection(),
+            collection: new Photos(),
             listeners: {
                 'app change:keyword': 'fetch',
-                'collection sync': 'renderResults'
+                'collection sync': 'renderResults',
+                'collection reset': 'renderResults'
             },
             events: {},
             initialize: function () {},
@@ -28,6 +29,8 @@ define([
 
                 if (keyword) {
                     this.collection.fetch();
+                } else if (this.collection.length) {
+                    this.collection.reset();
                 }
             }, 500),
             renderResults: function () {
@@ -39,7 +42,7 @@ define([
                     });
                 });
 
-                this.$el.append(html);
+                this.$el.html(html);
             }
         });
 

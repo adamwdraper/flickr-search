@@ -1,13 +1,13 @@
 define([
     'backbone',
     'utilities/flickr/utility',
-    './model'
-], function (Backbone, flickr, Model) {
+    './photo'
+], function (Backbone, flickr, Photo) {
     var Collection = Backbone.Collection.extend({
         options: {
             keyword: ''
         },
-        model: Model,
+        model: Photo,
         url: function () {
             var params = {
                     method: 'flickr.photos.search',
