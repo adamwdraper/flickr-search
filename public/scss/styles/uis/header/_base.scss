@@ -14,7 +14,7 @@
     left: 0;
     right: 0;
     line-height: $layout-header-height;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.35);
     text-align: center;
 
     input {
@@ -22,7 +22,7 @@
         width: 96%;
         padding: 0.2rem 0.5rem;
         border: none;
-        border-radius: .2em;
+        border-radius: .15em;
         line-height: 1.6rem;
         max-width: 20em;
     }
