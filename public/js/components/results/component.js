@@ -31,9 +31,7 @@ define([
                 return this;
             },
             nextKeyword: function () {
-                this.app.set('page', 1, {
-                    silent: true
-                });
+                this.app.set('page', 1);
 
                 this.trigger('fetch');
             },
