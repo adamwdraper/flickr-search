@@ -1,19 +1,22 @@
 /**
- * @appular boilerplate
+ * @appular header
  */
 
 define([
     'jquery',
     'underscore',
-    'backbone',
-    'template!./template.html'
-], function ($, _, Backbone, template) {
+    'backbone'
+], function ($, _, Backbone) {
     var View = Backbone.View.extend({
-            template: template,
+            bindings: {
+                input: 'value'
+            },
             events: {},
             initialize: function () {},
             render: function () {
-                this.$el.html(this.template());
+                this.stickit(this.app.get('keyword', {
+                    model: true
+                }));
 
                 return this;
             }

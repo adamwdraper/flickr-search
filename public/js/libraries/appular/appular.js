@@ -443,8 +443,10 @@ define([
             /**
             @function get - shortcut to get params's value
             */
-            get: function(name) {
-                return this.collection.getValue(name);
+            get: function(name, options) {
+                options = options || {};
+                
+                return options.model ? this.collection.get(name) : this.collection.getValue(name);
             },
             /**
             @function set - shortcut to set param's value

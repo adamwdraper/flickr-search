@@ -7,7 +7,12 @@ define([
     'backbone'
 ], function ($, _, Backbone) {
     var App = Backbone.App.extend({
-            params: {},
+            params: {
+                keyword: {
+                    value: '',
+                    alias: 'k'
+                }
+            },
             initialize: function () {},
             render: function () {
                 Backbone.trigger('appular:app:rendered');
