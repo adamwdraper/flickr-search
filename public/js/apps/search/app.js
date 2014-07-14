@@ -11,6 +11,11 @@ define([
                 keyword: {
                     value: '',
                     alias: 'k'
+                },
+                page: {
+                    value: 1,
+                    alias: 'p',
+                    type: 'number'
                 }
             },
             initialize: function () {},
