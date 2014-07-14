@@ -1,0 +1,9 @@
+// It makes math dead simple. - http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+* {
+    @include box-sizing(border-box);
+}
+
+// Bonus Clearfix Style --------------------------------
+.clearfix {
+    @include clearfix;
+}

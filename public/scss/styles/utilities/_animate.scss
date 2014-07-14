@@ -1,0 +1,39 @@
+// entrance
+@include keyframes(animate-fade-in-down) {
+    from {
+        opacity: 0;
+        @include transform(translateY(-20px));
+    }
+    to {
+        opacity: 1;
+        @include transform(translateY(0));
+    }
+}
+
+// exit
+@include keyframes(animate-fade-out-up) {
+    from {
+        opacity: 1;
+        @include transform(translateY(0));
+    }
+    to {
+        opacity: 0;
+        @include transform(translateY(-20px));
+    }
+}
+
+// pulse
+/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+@include keyframes(pulse) {
+    0% {
+        @include transform(scale(1));
+    }
+
+    50% {
+        @include transform(scale(1.3));
+    }
+
+    100% {
+        @include transform(scale(1));
+    }
+}
