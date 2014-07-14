@@ -17,7 +17,8 @@ define([
     // Render all components when app is ready
     Backbone.on('appular:app:required', function () {
         Backbone.history.start({
-            root: window.location.pathname
+            root: window.location.pathname,
+            pushState: true
         });
     });
 
