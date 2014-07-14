@@ -11,11 +11,18 @@ define([
     var View = Backbone.View.extend({
             template: template,
             events: {},
-            initialize: function () {},
+            initialize: function () {
+                this.listenTo(this.app.get('keyword', {
+                    model: true
+                }), 'change:value', this.fetch);
+            },
             render: function () {
                 this.$el.html(this.template());
 
                 return this;
+            },
+            fetch: function () {
+                console.log('fetch');
             }
         });
 
