@@ -1,15 +1,19 @@
 /**
- * @appular boilerplate
+ * @appular results
  */
 
 define([
     'jquery',
     'underscore',
     'backbone',
+    './collection',
     'template!./template.html'
-], function ($, _, Backbone, template) {
+], function ($, _, Backbone, Collection, template) {
     var View = Backbone.View.extend({
-            template: template,
+            collection: new Collection(),
+            listeners: {
+                'collection sync': 'renderResults'
+            },
             events: {},
             initialize: function () {
                 this.listenTo(this.app.get('keyword', {
@@ -17,12 +21,22 @@ define([
                 }), 'change:value', this.fetch);
             },
             render: function () {
-                this.$el.html(this.template());
 
                 return this;
             },
             fetch: function () {
-                console.log('fetch');
+                this.collection.fetch();
+            },
+            renderResults: function () {
+                var html = '';
+
+                this.collection.each(function (photo) {
+                    html += template({
+                        src: photo.getImageUrl()
+                    });
+                });
+
+                this.$el.append(html);
             }
         });
 
