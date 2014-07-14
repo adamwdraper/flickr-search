@@ -8,7 +8,7 @@ define([
     'backbone',
     'plugins/infinite-scroll/plugin',
     './photos',
-    'template!./template.html'
+    'template!./photo.html'
 ], function ($, _, Backbone, InfiniteScroll, Photos, template) {
     var View = Backbone.View.extend({
             collection: new Photos(),
@@ -27,6 +27,8 @@ define([
                     el: this.$el
                 }).render();
                 this.listenTo(this.plugins.infiniteScroll, 'nearBottom', this.nextPage);
+
+                this.trigger('fetch');
 
                 return this;
             },
@@ -54,7 +56,8 @@ define([
 
                 this.collection.each(function (photo) {
                     html += template({
-                        src: photo.getUrl()
+                        src: photo.getUrl(),
+                        href: photo.getLink()
                     });
                 });
 
