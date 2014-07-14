@@ -453,7 +453,7 @@ body {
   left: 0;
   right: 0;
   line-height: 3rem;
-  background-color: #c0c3c4;
+  background-color: rgba(0, 0, 0, 0.2);
   text-align: center; }
   .ui-header input {
     outline: none;
@@ -466,4 +466,5 @@ body {
 
 .ui-results {
   margin-top: 3rem;
-  text-align: center; }
+  text-align: center;
+  padding: .5em 0; }
