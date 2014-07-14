@@ -13,10 +13,10 @@ define([
     var View = Backbone.View.extend({
             collection: new Photos(),
             listeners: {
-                'app change:keyword': 'fetch',
-                'app change:page': 'fetch',
+                'app change:keyword': 'nextKeyword',
                 'collection sync': 'renderResults',
-                'collection reset': 'renderResults'
+                'collection reset': 'renderResults',
+                'fetch': 'fetch'
             },
             events: {},
             initialize: function () {
@@ -30,34 +30,33 @@ define([
 
                 return this;
             },
-            fetch: _.debounce(function () {
-                var keyword = this.app.get('keyword'),
-                    page = 1;
-                
-                this.app.set('page', page, {
+            nextKeyword: function () {
+                this.app.set('page', 1, {
                     silent: true
                 });
 
-                this.collection.options.keyword = keyword;
-                this.collection.options.page = page;
+                this.trigger('fetch');
+            },
+            nextPage: function () {
+                var page = this.app.get('page');
 
-                if (keyword) {
+                this.app.set('page', page + 1);
+
+                this.trigger('fetch');
+            },
+            fetch: _.debounce(function () {
+                if (this.app.get('keyword')) {
                     this.collection.fetch();
                 } else if (this.collection.length) {
                     this.collection.reset();
                 }
             }, 500),
-            nextPage: function () {
-                var page = this.app.get('page');
-
-                this.app.set('page', page + 1);
-            },
             renderResults: function () {
                 var html = '';
 
                 this.collection.each(function (photo) {
                     html += template({
-                        src: photo.getImageUrl()
+                        src: photo.getUrl()
                     });
                 });
 
@@ -66,6 +65,8 @@ define([
                 } else {
                     this.$el.append(html);
                 }
+
+                this.plugins.infiniteScroll.trigger('reset');
             }
         });
 
