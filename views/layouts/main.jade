@@ -1,0 +1,26 @@
+doctype 5
+html(lang="en-US")
+    block vars
+        - var app = 'default'
+
+    head
+        meta(charset="UTF-8")
+        title Appular Project
+
+        block head
+
+    body(data-appular-app="#{app}")
+
+        header 
+            block header
+
+        block content
+
+        footer
+            block footer
+
+        block scripts
+            - if (environment === 'development')
+                script(src="/js/libraries/require/require.js", data-main="/js/libraries/require/configs/dev")
+            - else
+                script(src="/js/build/initialize.js")
