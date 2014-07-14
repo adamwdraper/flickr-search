@@ -1,0 +1,29 @@
+// Variables -------------------------------------
+
+
+// Mixins --------------------------------------
+
+
+// Placeholders --------------------------------------
+
+
+// Styles --------------------------------------
+.ui-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    line-height: $layout-header-height;
+    background-color: $color-gray-light;
+    text-align: center;
+
+    input {
+        outline: none;
+        width: 96%;
+        padding: 0 0.5rem;
+        border: none;
+        border-radius: .2em;
+        line-height: 2rem;
+        max-width: 20em;
+    }
+}

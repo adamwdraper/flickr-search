@@ -11,7 +11,12 @@
 @import "../styles/variables/size";
 
 // Utilities
+@import "../styles/utilities/animate";
+@import "../styles/utilities/functions";
+@import "../styles/utilities/mixins";
+@import "../styles/utilities/styles";
 
-// UI
+// UIs
 @import "../styles/uis/body/base";
+@import "../styles/uis/header/base";
 

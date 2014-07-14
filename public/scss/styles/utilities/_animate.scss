@@ -21,19 +21,3 @@
         @include transform(translateY(-20px));
     }
 }
-
-// pulse
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
-@include keyframes(pulse) {
-    0% {
-        @include transform(scale(1));
-    }
-
-    50% {
-        @include transform(scale(1.3));
-    }
-
-    100% {
-        @include transform(scale(1));
-    }
-}

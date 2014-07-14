@@ -354,6 +354,91 @@ td,
 th {
   padding: 0; }
 
+@-webkit-keyframes animate-fade-in-down {
+  from {
+    opacity: 0;
+    -webkit-transform: translateY(-20px); }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translateY(0); } }
+
+@-moz-keyframes animate-fade-in-down {
+  from {
+    opacity: 0;
+    -moz-transform: translateY(-20px); }
+
+  to {
+    opacity: 1;
+    -moz-transform: translateY(0); } }
+
+@-o-keyframes animate-fade-in-down {
+  from {
+    opacity: 0;
+    -o-transform: translateY(-20px); }
+
+  to {
+    opacity: 1;
+    -o-transform: translateY(0); } }
+
+@keyframes animate-fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); }
+
+  to {
+    opacity: 1;
+    transform: translateY(0); } }
+
+@-webkit-keyframes animate-fade-out-up {
+  from {
+    opacity: 1;
+    -webkit-transform: translateY(0); }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(-20px); } }
+
+@-moz-keyframes animate-fade-out-up {
+  from {
+    opacity: 1;
+    -moz-transform: translateY(0); }
+
+  to {
+    opacity: 0;
+    -moz-transform: translateY(-20px); } }
+
+@-o-keyframes animate-fade-out-up {
+  from {
+    opacity: 1;
+    -o-transform: translateY(0); }
+
+  to {
+    opacity: 0;
+    -o-transform: translateY(-20px); } }
+
+@keyframes animate-fade-out-up {
+  from {
+    opacity: 1;
+    transform: translateY(0); }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px); } }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.clearfix {
+  *zoom: 1; }
+  .clearfix:before, .clearfix:after {
+    content: " ";
+    display: table; }
+  .clearfix:after {
+    clear: both; }
+
 html, body {
   height: 100%; }
 
@@ -361,3 +446,20 @@ body {
   font-family: "Titillium Web", sans-serif;
   color: #3b3e3f;
   font-weight: 300; }
+
+.ui-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  line-height: 3rem;
+  background-color: #c0c3c4;
+  text-align: center; }
+  .ui-header input {
+    outline: none;
+    width: 96%;
+    padding: 0 0.5rem;
+    border: none;
+    border-radius: .2em;
+    line-height: 2rem;
+    max-width: 20em; }
