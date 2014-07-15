@@ -23,8 +23,10 @@ define([
                 _.bindAll(this, 'fetch');
             },
             render: function () {
+                this.$container = this.$el.find('[data-container]');
+
                 this.plugins.infiniteScroll = new InfiniteScroll({
-                    el: this.$el
+                    el: this.$container
                 }).render();
                 this.listenTo(this.plugins.infiniteScroll, 'nearBottom', this.nextPage);
 
@@ -62,9 +64,9 @@ define([
                 });
 
                 if (this.app.get('page') === 1) {
-                    this.$el.html(html);
+                    this.$container.html(html);
                 } else {
-                    this.$el.append(html);
+                    this.$container.append(html);
                 }
 
                 this.plugins.infiniteScroll.trigger('reset');

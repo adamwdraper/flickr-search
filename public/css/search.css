@@ -453,7 +453,7 @@ body {
   left: 0;
   right: 0;
   line-height: 3rem;
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: rgba(0, 0, 0, 0.75);
   text-align: center; }
   .ui-header input {
     outline: none;
@@ -468,7 +468,13 @@ body {
   margin-top: 3rem;
   text-align: center;
   padding: .5em 0; }
+  .ui-results .container {
+    font-size: 0; }
   .ui-results .photo {
-    display: inline-block; }
+    display: inline-block;
+    padding: .25em;
+    font-size: 1rem;
+    padding-top: 0; }
   .ui-results img {
-    border-radius: .15em; }
+    border-radius: .15em;
+    border: 1px solid #dfe1e1; }
