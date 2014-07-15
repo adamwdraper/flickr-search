@@ -10,7 +10,7 @@ define([
                     method: 'flickr.photos.search',
                     api_key: flickr.api.key,
                     text: this.app.get('keyword'),
-                    extras: 'description, media, date_taken, owner_name, tags, , url_q, url_z, url_c, url_l',
+                    extras: 'description, media, date_taken, owner_name, tags, url_z, url_c, url_l',
                     format: 'json',
                     nojsoncallback: 1,
                     per_page: 40,
