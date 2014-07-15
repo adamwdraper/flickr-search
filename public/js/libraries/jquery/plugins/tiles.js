@@ -99,13 +99,17 @@
                 var scale = containerWidth/row.width;
 
                 row.photos.forEach(function (photo) {
-                    var image = new Image();
-                    image.src = photo.src;
+                    var $image = $('<img>');
+                    
+                    $image.attr('src', photo.src);
+                    $image.width(photo.width * scale);
+                    $image.height(photo.height * scale);
 
-                    image.width = photo.width * scale;
-                    image.height = photo.height * scale;
+                    $image.on('load', function () {
+                        $(this).addClass('loaded');
+                    });
 
-                    $this.append(image);
+                    $this.append($image);
                 });
             });
         },

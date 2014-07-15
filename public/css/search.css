@@ -471,4 +471,7 @@ body {
   .ui-results .container {
     font-size: 0; }
   .ui-results img {
-    border: 1px solid white; }
+    opacity: 0;
+    transition: opacity 2s; }
+    .ui-results img.loaded {
+      opacity: 1; }
