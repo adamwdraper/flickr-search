@@ -8,9 +8,8 @@ define([
     'backbone',
     'plugins/infinite-scroll/plugin',
     'libraries/jquery/plugins/tiles',
-    './photos',
-    'template!./photo.html'
-], function ($, _, Backbone, InfiniteScroll, Tiles, Photos, template) {
+    './photos'
+], function ($, _, Backbone, InfiniteScroll, Tiles, Photos) {
     var View = Backbone.View.extend({
             collection: new Photos(),
             listeners: {
