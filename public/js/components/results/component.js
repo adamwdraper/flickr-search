@@ -63,6 +63,7 @@ define([
 
                     photos.push({
                         src: photo.getUrl(),
+                        href: photo.getLink(),
                         height: dimensions.height,
                         width: dimensions.width
                     });
