@@ -1,7 +1,5 @@
-// Uses AMD or browser globals to create a jQuery plugin.
-
 /**
- * Name - jQuery Plugin
+ * Tiles - jQuery Plugin
  *
  * Version: 0.0.1 (5/25/2012)
  * Requires: jQuery v1.7+
@@ -100,7 +98,8 @@
                 var scale = containerWidth/row.width;
 
                 row.photos.forEach(function (photo) {
-                    var $image = $('<img>');
+                    var $a = $('<a></a>'),
+                        $image = $('<img>');
 
                     $image.attr('src', photo.src);
                     if (options.margin) {
@@ -113,7 +112,13 @@
                         $(this).addClass('loaded');
                     });
 
-                    $this.append($image);
+                    if (photo.href) {
+                        $a.attr('href', photo.href).attr('target', '_blank');
+                    }
+
+                    $a.addClass('tile').html($image);
+
+                    $this.append($a);
                 });
             });
         },
