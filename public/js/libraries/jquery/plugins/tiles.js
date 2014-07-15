@@ -24,6 +24,7 @@
         options = {
             imageHeight: 250
         },
+        rows = [],
         normalizeHeight = function (photo) {
             var height = options.imageHeight,
                 scale = height/Number(photo.height);
@@ -34,6 +35,43 @@
         isCloser = function (a, b, goal) {
             return Math.abs(a - goal) > Math.abs(b - goal);
         },
+        debounce = function (func, threshold, execAsap) {
+            var timeout;
+            return function debounced () {
+                var obj = this, args = arguments;
+                function delayed () {
+                    if (!execAsap)
+                        func.apply(obj, args);
+                    timeout = null;
+                };
+
+                if (timeout)
+                    clearTimeout(timeout);
+                else if (execAsap)
+                    func.apply(obj, args);
+
+                timeout = setTimeout(delayed, threshold || 250);
+            };
+        },
+        render = function (newRows) {
+            var containerWidth = $this.width(),
+                rowsToRender = newRows || rows;
+            
+            rowsToRender.forEach(function (row) {
+                // find out scale for row
+                var scale = containerWidth/row.width;
+
+                row.photos.forEach(function (photo) {
+                    var image = new Image();
+                    image.src = photo.src;
+
+                    image.width = photo.width * scale;
+                    image.height = photo.height * scale;
+
+                    $this.append(image);
+                });
+            });
+        },
         api = {
             init: function () {
                 return this.each(function () {
@@ -41,6 +79,8 @@
 
                     if (!$this.data('initialized')) {
                         $this.data('initialized', true);
+
+                        // $(window).on('resize', debounce());
                     }
                 });
             },
@@ -65,7 +105,7 @@
                         // close old row
                         rows.push(row);
 
-                        // reset to next row
+                        // start to next row
                         row = {
                             width: photo.width,
                             photos: [
@@ -75,22 +115,11 @@
                     }
                 });
 
-                rows.forEach(function (row) {
-                    // find out scale for row
-                    var scale = containerWidth/row.width;
-
-                    row.photos.forEach(function (photo) {
-                        var image = new Image();
-                        image.src = photo.src;
-
-                        image.width = photo.width * scale;
-                        image.height = photo.height * scale;
-
-                        $this.append(image);
-                    });
-                });
+                render(rows);
             },
             empty: function () {
+                rows = [];
+
                 $this.empty();
             }
         };
