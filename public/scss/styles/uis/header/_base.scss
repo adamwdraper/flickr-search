@@ -16,6 +16,7 @@
     line-height: $layout-header-height;
     background-color: rgba(0, 0, 0, 0.75);
     text-align: center;
+    z-index: 1;
 
     input {
         outline: none;

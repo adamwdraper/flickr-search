@@ -28,10 +28,10 @@
         photos = [],
         normalizeHeight = function (photo) {
             var height = options.imageHeight,
-                scale = height/Number(photo.height);
+                scale = (height/Number(photo.height + (options.margin * 2))).toFixed(3);
 
-            photo.height = Number(photo.height) * scale;
-            photo.width = Number(photo.width) * scale;
+            photo.height = Number(photo.height - (options.margin * 2)) * scale;
+            photo.width = Number(photo.width - (options.margin * 2)) * scale;
         },
         isCloser = function (a, b, goal) {
             return Math.abs(a - goal) > Math.abs(b - goal);
@@ -103,8 +103,11 @@
                     var $image = $('<img>');
 
                     $image.attr('src', photo.src);
-                    $image.width((photo.width - options.margin) * scale);
-                    $image.height((photo.height - options.margin) * scale);
+                    if (options.margin) {
+                        $image.css('margin', options.margin + 'px');
+                    }
+                    $image.width(Math.floor((photo.width - (options.margin * 2)) * scale));
+                    $image.height(Math.floor((photo.height - (options.margin * 2)) * scale));
 
                     $image.on('load', function () {
                         $(this).addClass('loaded');

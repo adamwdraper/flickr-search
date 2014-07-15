@@ -454,7 +454,8 @@ body {
   right: 0;
   line-height: 3rem;
   background-color: rgba(0, 0, 0, 0.75);
-  text-align: center; }
+  text-align: center;
+  z-index: 1; }
   .ui-header input {
     outline: none;
     width: 96%;
@@ -471,7 +472,6 @@ body {
   .ui-results .container {
     font-size: 0; }
   .ui-results img {
-    border: 1px solid white;
     opacity: 0;
     transition: opacity 2s; }
     .ui-results img.loaded {
