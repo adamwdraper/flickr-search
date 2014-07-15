@@ -1,2 +1,7 @@
 // Styles --------------------------------------
-.ui-boilerplate {}
+.ui-header {
+    input {
+        max-width: 30em;
+        border-right: 1px solid $ui-header-border-color;
+    }
+}
