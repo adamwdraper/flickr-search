@@ -89,8 +89,9 @@
                         $this.append(image);
                     });
                 });
-
-                console.log(rows);
+            },
+            empty: function () {
+                $this.empty();
             }
         };
 

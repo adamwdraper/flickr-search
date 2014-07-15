@@ -69,10 +69,10 @@ define([
                 });
 
                 if (this.app.get('page') === 1) {
-                    this.$container.tiles('add', photos);
-                } else {
-                    // this.$container.append(html);
+                    this.$container.tiles('empty');
                 }
+
+                this.$container.tiles('add', photos);
 
                 this.plugins.infiniteScroll.trigger('reset');
             }

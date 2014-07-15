@@ -11,21 +11,13 @@
 .ui-results {
     margin-top: $layout-header-height;
     text-align: center;
-    padding: .5em 0;
+    padding: 1px 0;
 
     .container {
         font-size: 0;
     }
 
-    .photo {
-        display: inline-block;
-        padding: .25em;
-        font-size: 1rem;
-        padding-top: 0;
-    }
-
     img {        
-        border-radius: .15em;
-        border: 1px solid $color-gray-lighter;
+        border: 1px solid white;
     }
 }
