@@ -37,17 +37,20 @@
         debounce = function (func, threshold, execAsap) {
             var timeout;
             return function debounced () {
-                var obj = this, args = arguments;
-                function delayed () {
-                    if (!execAsap)
-                        func.apply(obj, args);
-                    timeout = null;
-                };
+                var obj = this,
+                    args = arguments,
+                    delayed = function () {
+                        if (!execAsap) {
+                            func.apply(obj, args);
+                        }
+                        timeout = null;
+                    };
 
-                if (timeout)
+                if (timeout) {
                     clearTimeout(timeout);
-                else if (execAsap)
+                } else if (execAsap) {
                     func.apply(obj, args);
+                }
 
                 timeout = setTimeout(delayed, threshold || 250);
             };
