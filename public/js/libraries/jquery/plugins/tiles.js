@@ -24,7 +24,7 @@
         options = {
             imageHeight: 250
         },
-        rows = [],
+        photos = [],
         normalizeHeight = function (photo) {
             var height = options.imageHeight,
                 scale = height/Number(photo.height);
@@ -53,9 +53,46 @@
                 timeout = setTimeout(delayed, threshold || 250);
             };
         },
-        render = function (newRows) {
+        buildRows = function (photos) {
             var containerWidth = $this.width(),
-                rowsToRender = newRows || rows;
+                rows = [],
+                row = {
+                    width: 0,
+                    photos: []
+                };
+
+            photos.forEach(function (photo) {
+                // normalize dimensions
+                normalizeHeight(photo);
+
+                // figure out which is closer to the container width
+                if (isCloser(row.width, row.width + photo.width, containerWidth)) {
+                    // add to row
+                    row.photos.push(photo);
+                    row.width = row.width + photo.width;
+                } else {
+                    // close old row
+                    rows.push(row);
+
+                    // start to next row
+                    row = {
+                        width: photo.width,
+                        photos: [
+                            photo
+                        ]
+                    };
+                }
+            });
+
+            return rows;
+        },
+        render = function (newPhotos) {
+            var containerWidth = $this.width(),
+                rowsToRender = newPhotos ? buildRows(newPhotos) : buildRows(photos);
+
+            if (!newPhotos) {
+                $this.empty();
+            }
             
             rowsToRender.forEach(function (row) {
                 // find out scale for row
@@ -72,6 +109,9 @@
                 });
             });
         },
+        resized = function () {
+            render();
+        },
         api = {
             init: function () {
                 return this.each(function () {
@@ -80,45 +120,18 @@
                     if (!$this.data('initialized')) {
                         $this.data('initialized', true);
 
-                        // $(window).on('resize', debounce());
+                        $(window).on('resize', debounce(resized));
                     }
                 });
             },
-            add: function (photos) {
-                var containerWidth = $this.width(),
-                    rows = [],
-                    row = {
-                        width: 0,
-                        photos: []
-                    };
+            add: function (newPhotos) {
+                // add new rows to all rows
+                photos = photos.concat(newPhotos);
 
-                photos.forEach(function (photo) {
-                    // normalize dimensions
-                    normalizeHeight(photo);
-
-                    // figure out which is closer to the container width
-                    if (isCloser(row.width, row.width + photo.width, containerWidth)) {
-                        // add to row
-                        row.photos.push(photo);
-                        row.width = row.width + photo.width;
-                    } else {
-                        // close old row
-                        rows.push(row);
-
-                        // start to next row
-                        row = {
-                            width: photo.width,
-                            photos: [
-                                photo
-                            ]
-                        };
-                    }
-                });
-
-                render(rows);
+                render(newPhotos);
             },
             empty: function () {
-                rows = [];
+                photos = [];
 
                 $this.empty();
             }
