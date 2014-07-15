@@ -22,7 +22,8 @@
 }(function ($) {
     var $this,
         options = {
-            imageHeight: 250
+            imageHeight: 250,
+            margin: 1
         },
         photos = [],
         normalizeHeight = function (photo) {
@@ -100,10 +101,10 @@
 
                 row.photos.forEach(function (photo) {
                     var $image = $('<img>');
-                    
+
                     $image.attr('src', photo.src);
-                    $image.width(photo.width * scale);
-                    $image.height(photo.height * scale);
+                    $image.width((photo.width - options.margin) * scale);
+                    $image.height((photo.height - options.margin) * scale);
 
                     $image.on('load', function () {
                         $(this).addClass('loaded');
