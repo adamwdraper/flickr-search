@@ -1,0 +1,70 @@
+// Grays -------------------------
+$color-black: #0a0a0b;
+$color-gray-darkest: #141515;
+$color-gray-darker: #3b3e3f;
+$color-gray-dark: #666;
+$color-gray: #8b9092;
+$color-gray-light: #c0c3c4;
+$color-gray-lighter: #dfe1e1;
+$color-gray-lighterest: #f2f2f2;
+$color-gray-lightest: #fafafa;
+$color-white: #fff;
+
+$color-grays:
+    black,
+    gray-darkest,
+    gray-darker,
+    gray-dark,
+    gray,
+    gray-light,
+    gray-lighter,
+    gray-lightest,
+    white;
+
+$color-grays-vars:
+    $color-black,
+    $color-gray-darkest,
+    $color-gray-darker,
+    $color-gray-dark,
+    $color-gray,
+    $color-gray-light,
+    $color-gray-lighter,
+    $color-gray-lightest,
+    $color-white;
+
+
+// Types and type colors
+// -------------------------
+$color-primary: #36b2d2;
+$color-secondary: #2f9cb9;
+$color-info: #e4c100;
+$color-error: #dd514c;
+$color-success: #5eb95e;
+$color-warning: #F57B00;
+
+$color-types:
+    primary,
+    secondary,
+    info,
+    error,
+    success,
+    warning;
+
+$color-types-vars:
+    $color-primary,
+    $color-secondary,
+    $color-info,
+    $color-error,
+    $color-success,
+    $color-warning;
+
+// Social colors
+$color-social-facebook: #3B579D;
+$color-social-twitter: #00ACED;
+$color-social-pinterest: #b81621;
+$color-social-google-plus: #e93f2e;
+$color-social-stumble-upon: #EB4924;
+$color-social-tumblr: #35465c;
+
+// Base Colors ---------------------
+$color-link: $color-gray;

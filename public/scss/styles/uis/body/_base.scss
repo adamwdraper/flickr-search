@@ -1,0 +1,21 @@
+// Variables -------------------------------------
+
+
+// Mixins --------------------------------------
+
+
+// Placeholders --------------------------------------
+
+
+// Styles --------------------------------------
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: $font-sans-family;
+    color: $color-gray-darker;
+    background-color: $color-gray-lightest;
+    font-weight: 300;
+    font-size: 100%;
+}

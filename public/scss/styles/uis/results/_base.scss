@@ -1,0 +1,28 @@
+// Variables -------------------------------------
+
+
+// Mixins --------------------------------------
+
+
+// Placeholders --------------------------------------
+
+
+// Styles --------------------------------------
+.ui-results {
+    margin-top: $layout-header-height;
+    text-align: center;
+    padding: 1px 0;
+
+    .container {
+        font-size: 0;
+    }
+
+    img {        
+        opacity: 0;
+        transition: opacity 2s;
+
+        &.loaded {
+            opacity: 1;
+        }
+    }
+}

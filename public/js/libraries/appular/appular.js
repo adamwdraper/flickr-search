@@ -81,8 +81,6 @@ define([
 
         options = options || {};
 
-        options.app = Appular.app;
-
         require([
             path
         ], function (Component) {
@@ -107,10 +105,8 @@ define([
 
                 options = options || {};
 
-                // add app when sent in
-                if (options.app) {
-                    this.app = options.app;
-                }
+                // add app
+                this.app = Appular.app;
 
                 // construct this.model and add options to view's model as attributes
                 if (options.model) {
@@ -178,6 +174,12 @@ define([
     Backbone.Collection = (function(Collection) {
         return Collection.extend({
             config: Appular.config,
+            constructor: function() {
+                // add app
+                this.app = Appular.app;
+                
+                Collection.apply(this, arguments);
+            },
             fetch: function (options) {
                 if (this.fixture && this.config.useFixtures) {
                     options.url = this.fixture;
@@ -191,6 +193,12 @@ define([
     Backbone.Model = (function(Model) {
         return Model.extend({
             config: Appular.config,
+            constructor: function() {
+                // add app
+                this.app = Appular.app;
+                
+                Model.apply(this, arguments);
+            },
             fetch: function (options) {
                 if (this.fixture && this.config.useFixtures) {
                     options.url = this.fixture;
@@ -309,7 +317,7 @@ define([
                 hash: {
                     useBang: false,
                     paramSeparator: '&',
-                    keyValSeparator: '=',
+                    keyValSeparator: ':',
                     arraySeparator: '|'
                 },
                 // where the router will read the initial data from.  options: hash or query
@@ -443,8 +451,10 @@ define([
             /**
             @function get - shortcut to get params's value
             */
-            get: function(name) {
-                return this.collection.getValue(name);
+            get: function(name, options) {
+                options = options || {};
+                
+                return options.model ? this.collection.get(name) : this.collection.getValue(name);
             },
             /**
             @function set - shortcut to set param's value
