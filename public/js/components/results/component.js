@@ -64,14 +64,14 @@ define([
                     photos.push({
                         src: photo.getUrl(),
                         height: dimensions.height,
-                        weight: dimensions.weight
+                        width: dimensions.width
                     });
                 });
 
                 if (this.app.get('page') === 1) {
                     this.$container.tiles('add', photos);
                 } else {
-                    this.$container.append(html);
+                    // this.$container.append(html);
                 }
 
                 this.plugins.infiniteScroll.trigger('reset');
