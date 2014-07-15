@@ -14,6 +14,7 @@ define([
                     format: 'json',
                     nojsoncallback: 1,
                     per_page: 40,
+                    sort: 'relevance',
                     page: this.app.get('page')
                 };
 
