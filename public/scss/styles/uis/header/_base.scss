@@ -1,5 +1,5 @@
 // Variables -------------------------------------
-
+$ui-header-border-color: $color-gray-lighter;
 
 // Mixins --------------------------------------
 
@@ -13,18 +13,19 @@
     top: 0;
     left: 0;
     right: 0;
-    line-height: $layout-header-height;
-    background-color: rgba(0, 0, 0, 0.75);
-    text-align: center;
+    line-height: 3rem;
+    background-color: white;
+    border-bottom: 1px solid $ui-header-border-color;
     z-index: 1;
 
     input {
         outline: none;
         width: 96%;
-        padding: 0.2rem 0.5rem;
+        padding: 0.5rem 1rem;
         border: none;
-        border-radius: .15em;
-        line-height: 1.6rem;
-        max-width: 20em;
+        border-right: 1px solid $ui-header-border-color;
+        line-height: 2.0rem;
+        max-width: 30em;
+        display: block;
     }
 }
