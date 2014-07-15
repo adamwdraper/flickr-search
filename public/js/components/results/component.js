@@ -7,9 +7,10 @@ define([
     'underscore',
     'backbone',
     'plugins/infinite-scroll/plugin',
+    'libraries/jquery/plugins/tiles',
     './photos',
     'template!./photo.html'
-], function ($, _, Backbone, InfiniteScroll, Photos, template) {
+], function ($, _, Backbone, InfiniteScroll, Tiles, Photos, template) {
     var View = Backbone.View.extend({
             collection: new Photos(),
             listeners: {
@@ -24,6 +25,7 @@ define([
             },
             render: function () {
                 this.$container = this.$el.find('[data-container]');
+                this.$container.tiles();
 
                 this.plugins.infiniteScroll = new InfiniteScroll({
                     el: this.$container
@@ -54,20 +56,23 @@ define([
                 }
             }, 500),
             renderResults: function () {
-                var html = '';
+                var photos = [];
 
                 this.collection.each(function (photo) {
-                    html += template({
+                    var dimensions = photo.getDimensions();
+
+                    photos.push({
                         src: photo.getUrl(),
-                        href: photo.getLink()
+                        height: dimensions.height,
+                        width: dimensions.width
                     });
                 });
 
                 if (this.app.get('page') === 1) {
-                    this.$container.html(html);
-                } else {
-                    this.$container.append(html);
+                    this.$container.tiles('empty');
                 }
+
+                this.$container.tiles('add', photos);
 
                 this.plugins.infiniteScroll.trigger('reset');
             }

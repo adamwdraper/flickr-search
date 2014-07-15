@@ -15,7 +15,8 @@ define([
                 page: {
                     value: 1,
                     alias: 'p',
-                    type: 'number'
+                    type: 'number',
+                    addToUrl: false
                 }
             },
             initialize: function () {},
