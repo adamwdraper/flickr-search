@@ -439,6 +439,13 @@ th {
   .clearfix:after {
     clear: both; }
 
+@font-face {
+  font-family: 'flickr-search';
+  src: url("/fonts/flickr-search.eot?-sedr1");
+  src: url("/fonts/flickr-search.eot?#iefix-sedr1") format("embedded-opentype"), url("/fonts/flickr-search.woff?-sedr1") format("woff"), url("/fonts/flickr-search.ttf?-sedr1") format("truetype"), url("/fonts/flickr-search.svg?-sedr1#flickr-search") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
 html, body {
   height: 100%; }
 
@@ -446,7 +453,8 @@ body {
   font-family: "Titillium Web", sans-serif;
   color: #3b3e3f;
   background-color: #fafafa;
-  font-weight: 300; }
+  font-weight: 300;
+  font-size: 100%; }
 
 .ui-header {
   position: fixed;
@@ -457,15 +465,44 @@ body {
   background-color: white;
   border-bottom: 1px solid #dfe1e1;
   z-index: 1; }
+  .ui-header .search {
+    position: absolute;
+    line-height: 3rem;
+    left: 1rem;
+    color: #c0c3c4; }
   .ui-header input {
     outline: none;
-    width: 96%;
-    padding: 0.5rem 1rem;
+    width: 100%;
+    padding: 0.5rem 1rem .5rem 2.5rem;
     border: none;
-    border-right: 1px solid #dfe1e1;
-    line-height: 2.0rem;
-    max-width: 30em;
-    display: block; }
+    height: 3rem;
+    display: block;
+    background: transparent;
+    z-index: 1;
+    position: relative; }
+
+i {
+  font-family: "flickr-search";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer; }
+  i.video:before {
+    content: "\e600"; }
+  i.search:before {
+    content: "\e601"; }
+  i.camera:before {
+    content: "\e602"; }
+  i.photo:before {
+    content: "\e603"; }
 
 .ui-results {
   margin-top: 3rem;
@@ -478,3 +515,8 @@ body {
     transition: opacity 2s; }
     .ui-results img.loaded {
       opacity: 1; }
+
+@media screen and (min-width: 37.5rem) {
+  .ui-header input {
+    max-width: 30em;
+    border-right: 1px solid #dfe1e1; } }

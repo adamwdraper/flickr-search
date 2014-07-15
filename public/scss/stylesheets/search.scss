@@ -3,6 +3,12 @@
 @import "../libraries/bourbon/bourbon";
 
 // styles
+// Utilities
+@import "../styles/utilities/animate";
+@import "../styles/utilities/functions";
+@import "../styles/utilities/mixins";
+@import "../styles/utilities/styles";
+
 // Variables
 @import "../styles/variables/color";
 @import "../styles/variables/font";
@@ -10,14 +16,17 @@
 @import "../styles/variables/screen";
 @import "../styles/variables/size";
 
-// Utilities
-@import "../styles/utilities/animate";
-@import "../styles/utilities/functions";
-@import "../styles/utilities/mixins";
-@import "../styles/utilities/styles";
-
 // UIs
 @import "../styles/uis/body/base";
 @import "../styles/uis/header/base";
+@import "../styles/uis/icon/base";
 @import "../styles/uis/results/base";
 
+// medium
+@media screen and (min-width: $screen-medium-min) {
+    @import "../styles/uis/header/devices/medium";
+}
+
+// large
+@media screen and (min-width: $screen-large-min) {
+}

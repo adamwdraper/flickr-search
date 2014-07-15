@@ -18,14 +18,22 @@ $ui-header-border-color: $color-gray-lighter;
     border-bottom: 1px solid $ui-header-border-color;
     z-index: 1;
 
+    .search {
+        position: absolute;
+        line-height: 3rem;
+        left: 1rem;
+        color: $color-gray-light;
+    }
+
     input {
         outline: none;
-        width: 96%;
-        padding: 0.5rem 1rem;
+        width: 100%;
+        padding: 0.5rem 1rem .5rem 2.5rem;
         border: none;
-        border-right: 1px solid $ui-header-border-color;
-        line-height: 2.0rem;
-        max-width: 30em;
+        height: 3rem;
         display: block;
+        background: transparent;
+        z-index: 1;
+        position: relative;
     }
 }
