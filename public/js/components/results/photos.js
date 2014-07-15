@@ -13,7 +13,7 @@ define([
                     extras: 'description, media, date_taken, owner_name, tags, , url_q, url_z, url_c, url_l',
                     format: 'json',
                     nojsoncallback: 1,
-                    per_page: 50,
+                    per_page: 25,
                     page: this.app.get('page')
                 };
 
