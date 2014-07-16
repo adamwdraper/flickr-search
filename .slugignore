@@ -1,0 +1,13 @@
+/node_modules/karma/
+/node_modules/grunt-karma/
+/node_modules/grunt-open/
+/node_modules/mocha/
+/node_modules/karma-mocha/
+/node_modules/karma-requirejs/
+/node_modules/chai/
+/node_modules/karma-chai/
+/node_modules/karma/
+/node_modules/sinon/
+/node_modules/karma-firefox-launcher/
+/node_modules/karma-chrome-launcher/
+/node_modules/karma-mocha-reporter/
