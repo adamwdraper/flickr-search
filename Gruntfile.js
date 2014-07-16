@@ -207,7 +207,7 @@ module.exports = function(grunt) {
             build: {
                 options: {
                     style: 'compressed',
-                    noCache: true
+                    noCache: true,
                     bundleExec: true
                 },
                 files: [
