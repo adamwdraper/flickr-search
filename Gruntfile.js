@@ -244,8 +244,7 @@ module.exports = function(grunt) {
         'watch'
     ]);
 
-    grunt.registerTask('build', 'Hints and builds production JS, runs tests, builds JS documentation, builds production CSS', [
-        'test',
+    grunt.registerTask('build', 'Hints and builds production JS, builds JS documentation, builds production CSS', [
         'requirejs',
         'sass:build'
     ]);
