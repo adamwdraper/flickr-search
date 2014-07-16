@@ -1,0 +1,38 @@
+// Variables -------------------------------------
+
+
+// Mixins --------------------------------------
+
+
+// Placeholders --------------------------------------
+
+
+// Styles --------------------------------------
+i {
+    font-family: "flickr-search";
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: pointer;
+
+    &.video:before {
+        content: "\e600";
+    }
+    &.search:before {
+        content: "\e601";
+    }
+    &.camera:before {
+        content: "\e602";
+    }
+    &.photo:before {
+        content: "\e603";
+    }
+}
