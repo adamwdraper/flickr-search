@@ -426,6 +426,22 @@ th {
     opacity: 0;
     transform: translateY(-20px); } }
 
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+@-moz-keyframes spin {
+  to {
+    -moz-transform: rotate(360deg); } }
+
+@-o-keyframes spin {
+  to {
+    -o-transform: rotate(360deg); } }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg); } }
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -503,6 +519,21 @@ i {
     content: "\e602"; }
   i.photo:before {
     content: "\e603"; }
+
+.ui-loader {
+  text-align: center; }
+  .ui-loader .spinner {
+    display: inline-block;
+    border: 2px solid #dfe1e1;
+    font-size: 20px;
+    width: 1em;
+    height: 1em;
+    border-radius: .5em;
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    border-top-color: #36b2d2;
+    margin: 1em 0; }
 
 .ui-results {
   margin-top: 3rem;

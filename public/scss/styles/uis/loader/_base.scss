@@ -1,0 +1,29 @@
+// Variables -------------------------------------
+$ui-loader-color: $color-primary !default;
+$ui-loader-background-color: $color-gray-lighter !default;
+$ui-loader-stroke: 2px !default;
+$ui-loader-diameter: 20px !default;
+$ui-loader-sides: 1 !default;
+
+// Mixins --------------------------------------
+
+
+// Placeholders --------------------------------------
+
+
+// Styles --------------------------------------
+.ui-loader {
+    text-align: center;
+
+    .spinner {
+        display: inline-block;
+        border: $ui-loader-stroke solid $ui-loader-background-color;
+        font-size: $ui-loader-diameter;
+        width: 1em;
+        height: 1em;
+        border-radius: .5em;
+        @include animation(spin 1.0s linear infinite);
+        border-top-color: $ui-loader-color;
+        margin: 1em 0;
+    }
+}
