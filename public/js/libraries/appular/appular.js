@@ -106,7 +106,7 @@ define([
                 options = options || {};
 
                 // add app
-                this.app = options.app || Appular.app
+                this.app = options.app || Appular.app;
 
                 // construct this.model and add options to view's model as attributes
                 if (options.model) {
