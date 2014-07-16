@@ -63,7 +63,7 @@
                     photos: []
                 };
 
-            photos.forEach(function (photo) {
+            photos.forEach(function (photo, index) {
                 // normalize dimensions
                 normalizeHeight(photo);
 
@@ -83,6 +83,11 @@
                             photo
                         ]
                     };
+                }
+
+                if (index === photos.length - 1) {
+                    // close final row
+                    rows.push(row);
                 }
             });
 
