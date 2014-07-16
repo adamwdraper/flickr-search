@@ -9,8 +9,9 @@ define([
     'plugins/infinite-scroll/plugin',
     'libraries/jquery/plugins/tiles',
     './photos',
-    'template!./loader.html'
-], function ($, _, Backbone, InfiniteScroll, Tiles, Photos, loader) {
+    'template!./loader.html',
+    'template!./no-results.html'
+], function ($, _, Backbone, InfiniteScroll, Tiles, Photos, loader, noResults) {
     var View = Backbone.View.extend({
             collection: new Photos(),
             listeners: {
@@ -64,24 +65,34 @@ define([
             renderResults: function () {
                 var photos = [];
 
-                this.collection.each(function (photo) {
-                    var dimensions = photo.getDimensions();
+                if (this.collection.length) {
+                    this.collection.each(function (photo) {
+                        var dimensions = photo.getDimensions();
 
-                    photos.push({
-                        src: photo.getUrl(),
-                        href: photo.getLink(),
-                        height: dimensions.height,
-                        width: dimensions.width
+                        photos.push({
+                            src: photo.getUrl(),
+                            href: photo.getLink(),
+                            height: dimensions.height,
+                            width: dimensions.width
+                        });
                     });
-                });
 
-                if (this.app.get('page') === 1) {
-                    this.$container.tiles('empty');
+                    if (this.app.get('page') === 1) {
+                        this.$container.tiles('empty');
+                    }
+
+                    this.$container.tiles('add', photos);
+
+                    this.plugins.infiniteScroll.trigger('reset');
+                } else {
+                    if (this.app.get('page') === 1) {
+                        this.$container.html(noResults({
+                            keyword: this.app.get('keyword')
+                        }));
+                    } else {
+                        this.plugins.infiniteScroll.trigger('destroy');                        
+                    }
                 }
-
-                this.$container.tiles('add', photos);
-
-                this.plugins.infiniteScroll.trigger('reset');
             }
         });
 

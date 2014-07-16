@@ -534,6 +534,10 @@ i {
     transition: opacity 1s; }
     .ui-results img.loaded {
       opacity: 1; }
+  .ui-results .message {
+    font-size: 1rem;
+    margin: 1rem 0;
+    text-align: center; }
 
 @media screen and (min-width: 37.5rem) {
   .ui-header input {
