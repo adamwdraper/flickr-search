@@ -4,3 +4,4 @@ npm-debug.log
 sass-cache
 public/js/build/
 public/css
+.bundle
