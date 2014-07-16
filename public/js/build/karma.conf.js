@@ -1,0 +1,1 @@
+module.exports=function(e){e.set({frameworks:["mocha","requirejs","chai","sinon"],files:["libraries/require/configs/karma.js",{pattern:"**/*",included:!1}],exclude:["build/**/*"],reporters:["mocha"],browsers:["Chrome","Firefox"]})};
