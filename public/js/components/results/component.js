@@ -8,8 +8,9 @@ define([
     'backbone',
     'plugins/infinite-scroll/plugin',
     'libraries/jquery/plugins/tiles',
-    './photos'
-], function ($, _, Backbone, InfiniteScroll, Tiles, Photos) {
+    './photos',
+    'template!./loader.html'
+], function ($, _, Backbone, InfiniteScroll, Tiles, Photos, loader) {
     var View = Backbone.View.extend({
             collection: new Photos(),
             listeners: {
@@ -26,6 +27,8 @@ define([
                 this.$container = this.$el.find('[data-container]');
                 this.$container.tiles();
 
+                this.loader = loader();
+
                 this.plugins.infiniteScroll = new InfiniteScroll({
                     el: this.$container
                 }).render();
@@ -36,6 +39,10 @@ define([
                 return this;
             },
             nextKeyword: function () {
+                if (!this.$el.find('[data-loader]').length) {
+                    this.$container.html(this.loader);
+                }
+
                 this.app.set('page', 1);
 
                 this.trigger('fetch');
