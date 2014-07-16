@@ -543,7 +543,7 @@ i {
     font-size: 0; }
   .ui-results img {
     opacity: 0;
-    transition: opacity 2s; }
+    transition: opacity 1s; }
     .ui-results img.loaded {
       opacity: 1; }
 
