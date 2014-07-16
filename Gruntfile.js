@@ -207,8 +207,7 @@ module.exports = function(grunt) {
             build: {
                 options: {
                     style: 'compressed',
-                    noCache: true,
-                    bundleExec: true
+                    noCache: true
                 },
                 files: [
                     {
@@ -248,9 +247,5 @@ module.exports = function(grunt) {
     grunt.registerTask('build', 'Hints and builds production JS, builds JS documentation, builds production CSS', [
         'requirejs',
         'sass:build'
-    ]);
-
-    grunt.registerTask('heroku:production', 'Runs build task', [
-        'build'
     ]);
 };
