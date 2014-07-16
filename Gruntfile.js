@@ -249,4 +249,8 @@ module.exports = function(grunt) {
         'requirejs',
         'sass:build'
     ]);
+
+    grunt.registerTask('heroku', 'Runs build task', [
+        'build'
+    ]);
 };
