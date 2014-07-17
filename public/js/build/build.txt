@@ -35,4 +35,10 @@ components/results/component.js
 libraries/jquery/plugins/tiles.js
 components/results/photo.js
 components/results/photos.js
+text!components/results/loader.html
+template!components/results/loader.html
+text!components/results/error.html
+template!components/results/error.html
+text!components/results/no-results.html
+template!components/results/no-results.html
 components/results/component.js
