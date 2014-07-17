@@ -10,15 +10,20 @@ define([
     'libraries/jquery/plugins/tiles',
     './photos',
     'template!./loader.html',
+    'template!./error.html',
     'template!./no-results.html'
-], function ($, _, Backbone, InfiniteScroll, Tiles, Photos, loader, noResults) {
+], function ($, _, Backbone, InfiniteScroll, Tiles, Photos, loader, err, noResults) {
     var View = Backbone.View.extend({
-            loader: loader(),
+            messages: {
+                loader: loader(),
+                err: err()
+            },
             collection: new Photos(),
             listeners: {
                 'app change:keyword': 'nextKeyword',
                 'collection sync': 'renderResults',
                 'collection reset': 'renderResults',
+                'collection error': 'renderError',
                 'initKeyword': 'nextKeyword',
                 'fetch': 'fetch'
             },
@@ -47,7 +52,7 @@ define([
             nextKeyword: function () {
                 // add loader if it doesn't exist
                 if (!this.$el.find('[data-loader]').length) {
-                    this.$container.html(this.loader);
+                    this.$container.html(this.messages.loader);
                 }
 
                 // reset page
@@ -101,6 +106,9 @@ define([
                         this.plugins.infiniteScroll.trigger('destroy');
                     }
                 }
+            },
+            renderError: function () {
+                this.$container.html(this.messages.err);
             }
         });
 
