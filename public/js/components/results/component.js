@@ -40,6 +40,7 @@ define([
                     el: this.$container
                 }).render();
                 this.listenTo(this.plugins.infiniteScroll, 'nearBottom', this.fetchByPage);
+                this.plugins.infiniteScroll.trigger('pause');
 
                 // trigger render if keyword was loaded from url
                 if (this.app.get('keyword')) {
@@ -64,8 +65,7 @@ define([
                                 keyword: this.app.get('keyword')
                             }));
                         } else {
-                            // remove everything 
-                            this.$el.empty();
+                            this.$container.empty();
                         }
                     } else {
                         // no more results
@@ -86,6 +86,8 @@ define([
                 }
             },
             fetchByKeyword: function () {
+                this.plugins.infiniteScroll.trigger('pause');
+
                 this.renderLoader();
 
                 // reset page
