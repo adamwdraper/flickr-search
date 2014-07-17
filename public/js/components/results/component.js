@@ -8,14 +8,23 @@ define([
     'backbone',
     'plugins/infinite-scroll/plugin',
     'libraries/jquery/plugins/tiles',
-    './photos'
-], function ($, _, Backbone, InfiniteScroll, Tiles, Photos) {
+    './photos',
+    'template!./loader.html',
+    'template!./error.html',
+    'template!./no-results.html'
+], function ($, _, Backbone, InfiniteScroll, Tiles, Photos, loader, err, noResults) {
     var View = Backbone.View.extend({
+            messages: {
+                loader: loader(),
+                err: err()
+            },
             collection: new Photos(),
             listeners: {
                 'app change:keyword': 'nextKeyword',
                 'collection sync': 'renderResults',
                 'collection reset': 'renderResults',
+                'collection error': 'renderError',
+                'initKeyword': 'nextKeyword',
                 'fetch': 'fetch'
             },
             events: {},
@@ -23,19 +32,30 @@ define([
                 _.bindAll(this, 'fetch');
             },
             render: function () {
+                // initialize tiles
                 this.$container = this.$el.find('[data-container]');
                 this.$container.tiles();
 
+                // initialize infinite scroll and listen for events
                 this.plugins.infiniteScroll = new InfiniteScroll({
                     el: this.$container
                 }).render();
                 this.listenTo(this.plugins.infiniteScroll, 'nearBottom', this.nextPage);
 
-                this.trigger('fetch');
+                // trigger render if keyword was loaded from url
+                if (this.app.get('keyword')) {
+                    this.trigger('initKeyword');
+                }
 
                 return this;
             },
             nextKeyword: function () {
+                // add loader if it doesn't exist
+                if (!this.$el.find('[data-loader]').length) {
+                    this.$container.html(this.messages.loader);
+                }
+
+                // reset page
                 this.app.set('page', 1);
 
                 this.trigger('fetch');
@@ -57,24 +77,40 @@ define([
             renderResults: function () {
                 var photos = [];
 
-                this.collection.each(function (photo) {
-                    var dimensions = photo.getDimensions();
+                if (this.collection.length) {
+                    this.collection.each(function (photo) {
+                        var dimensions = photo.getDimensions();
 
-                    photos.push({
-                        src: photo.getUrl(),
-                        href: photo.getLink(),
-                        height: dimensions.height,
-                        width: dimensions.width
+                        if (dimensions.height && dimensions.width) {
+                            photos.push({
+                                src: photo.getUrl(),
+                                href: photo.getLink(),
+                                height: dimensions.height,
+                                width: dimensions.width
+                            });
+                        }
                     });
-                });
 
-                if (this.app.get('page') === 1) {
-                    this.$container.tiles('empty');
+                    if (this.app.get('page') === 1) {
+                        this.$container.tiles('empty');
+                    }
+
+                    this.$container.tiles('add', photos);
+
+                    this.plugins.infiniteScroll.trigger('reset');
+                } else {
+                    // if first page add no results message else end infinite scroll
+                    if (this.app.get('page') === 1) {
+                        this.$container.html(noResults({
+                            keyword: this.app.get('keyword')
+                        }));
+                    } else {
+                        this.plugins.infiniteScroll.trigger('destroy');
+                    }
                 }
-
-                this.$container.tiles('add', photos);
-
-                this.plugins.infiniteScroll.trigger('reset');
+            },
+            renderError: function () {
+                this.$container.html(this.messages.err);
             }
         });
 
