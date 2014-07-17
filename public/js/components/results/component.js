@@ -24,7 +24,6 @@ define([
                 'collection sync': 'renderResults',
                 'collection reset': 'renderResults',
                 'collection error': 'renderError',
-                'initKeyword': 'nextKeyword',
                 'fetch': 'fetch'
             },
             events: {},
@@ -44,7 +43,7 @@ define([
 
                 // trigger render if keyword was loaded from url
                 if (this.app.get('keyword')) {
-                    this.trigger('initKeyword');
+                    this.trigger('nextKeyword');
                 }
 
                 return this;
@@ -99,11 +98,15 @@ define([
 
                     this.plugins.infiniteScroll.trigger('reset');
                 } else {
-                    // if first page add no results message else end infinite scroll
+                    // if first page add no results message
                     if (this.app.get('page') === 1) {
-                        this.$container.html(noResults({
-                            keyword: this.app.get('keyword')
-                        }));
+                        if (this.app.get('keyword')) {
+                            this.$container.html(noResults({
+                                keyword: this.app.get('keyword')
+                            }));
+                        } else {
+                            this.$el.empty();
+                        }
                     } else {
                         this.plugins.infiniteScroll.trigger('destroy');
                     }
