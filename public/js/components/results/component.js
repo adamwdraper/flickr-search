@@ -14,17 +14,16 @@ define([
     'template!./no-results.html'
 ], function ($, _, Backbone, InfiniteScroll, Tiles, Photos, loader, err, noResults) {
     var View = Backbone.View.extend({
-            messages: {
+            templates: {
                 loader: loader(),
                 err: err()
             },
             collection: new Photos(),
             listeners: {
-                'app change:keyword': 'nextKeyword',
+                'app change:keyword': 'fetchByKeyword',
                 'collection sync': 'renderResults',
                 'collection reset': 'renderResults',
                 'collection error': 'renderError',
-                'initKeyword': 'nextKeyword',
                 'fetch': 'fetch'
             },
             events: {},
@@ -40,30 +39,64 @@ define([
                 this.plugins.infiniteScroll = new InfiniteScroll({
                     el: this.$container
                 }).render();
-                this.listenTo(this.plugins.infiniteScroll, 'nearBottom', this.nextPage);
+                this.listenTo(this.plugins.infiniteScroll, 'nearBottom', this.fetchByPage);
+                this.plugins.infiniteScroll.trigger('pause');
 
                 // trigger render if keyword was loaded from url
                 if (this.app.get('keyword')) {
-                    this.trigger('initKeyword');
+                    this.fetchByKeyword();
                 }
 
                 return this;
             },
-            nextKeyword: function () {
+            renderResults: function () {
+                if (this.collection.length) {
+                    // add tiles to container
+                    this.addTiles();
+
+                    // start infinite scroll listening
+                    this.plugins.infiniteScroll.trigger('reset');
+                } else {
+                    // no results
+                    if (this.app.get('page') === 1) {
+                        if (this.app.get('keyword')) {
+                            // show no results message
+                            this.$container.html(noResults({
+                                keyword: this.app.get('keyword')
+                            }));
+                        } else {
+                            this.$container.empty();
+                        }
+                    } else {
+                        // no more results
+                        this.plugins.infiniteScroll.trigger('destroy');
+                    }
+                }
+            },
+            renderTemplate: function (template) {
+                this.$container.html(this.templates[template]);
+            },
+            renderError: function () {
+                this.renderTemplate('err');
+            },
+            renderLoader: function () {
                 // add loader if it doesn't exist
                 if (!this.$el.find('[data-loader]').length) {
-                    this.$container.html(this.messages.loader);
+                    this.renderTemplate('loader');
                 }
+            },
+            fetchByKeyword: function () {
+                this.plugins.infiniteScroll.trigger('pause');
+
+                this.renderLoader();
 
                 // reset page
                 this.app.set('page', 1);
 
                 this.trigger('fetch');
             },
-            nextPage: function () {
-                var page = this.app.get('page');
-
-                this.app.set('page', page + 1);
+            fetchByPage: function () {
+                this.app.set('page', this.app.get('page') + 1);
 
                 this.trigger('fetch');
             },
@@ -74,43 +107,30 @@ define([
                     this.collection.reset();
                 }
             }, 500),
-            renderResults: function () {
+            addTiles: function () {
                 var photos = [];
 
-                if (this.collection.length) {
-                    this.collection.each(function (photo) {
-                        var dimensions = photo.getDimensions();
+                this.collection.each(function (photo) {
+                    var dimensions = photo.getDimensions();
 
-                        if (dimensions.height && dimensions.width) {
-                            photos.push({
-                                src: photo.getUrl(),
-                                href: photo.getLink(),
-                                height: dimensions.height,
-                                width: dimensions.width
-                            });
-                        }
-                    });
-
-                    if (this.app.get('page') === 1) {
-                        this.$container.tiles('empty');
+                    // flickr api doesn't alwasy return dimensions so we weed those out for now
+                    if (dimensions.height && dimensions.width) {
+                        photos.push({
+                            src: photo.getUrl(),
+                            href: photo.getLink(),
+                            height: dimensions.height,
+                            width: dimensions.width
+                        });
                     }
+                });
 
-                    this.$container.tiles('add', photos);
-
-                    this.plugins.infiniteScroll.trigger('reset');
-                } else {
-                    // if first page add no results message else end infinite scroll
-                    if (this.app.get('page') === 1) {
-                        this.$container.html(noResults({
-                            keyword: this.app.get('keyword')
-                        }));
-                    } else {
-                        this.plugins.infiniteScroll.trigger('destroy');
-                    }
+                // new set of results
+                if (this.app.get('page') === 1) {
+                    this.$container.tiles('empty');
                 }
-            },
-            renderError: function () {
-                this.$container.html(this.messages.err);
+
+                // render the tiles with plugin
+                this.$container.tiles('add', photos);
             }
         });
 
