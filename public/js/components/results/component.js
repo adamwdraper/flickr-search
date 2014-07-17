@@ -44,7 +44,7 @@ define([
 
                 // trigger render if keyword was loaded from url
                 if (this.app.get('keyword')) {
-                    this.trigger('fetchByKeyword');
+                    this.fetchByKeyword();
                 }
 
                 return this;
