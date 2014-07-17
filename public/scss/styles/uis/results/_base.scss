@@ -12,6 +12,7 @@
     margin-top: $layout-header-height;
     text-align: center;
     padding: 1px 0;
+    position: relative;
 
     .container {
         font-size: 0;
@@ -24,5 +25,11 @@
         &.loaded {
             opacity: 1;
         }
+    }
+
+    .message {
+        font-size: 1rem;
+        margin: 1rem 0;
+        text-align: center;
     }
 }

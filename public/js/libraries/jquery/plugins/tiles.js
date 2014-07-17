@@ -26,10 +26,10 @@
         photos = [],
         normalizeHeight = function (photo) {
             var height = options.imageHeight,
-                scale = (height/Number(photo.height + (options.margin * 2))).toFixed(3);
+                scale = (height/(Number(photo.height) + (options.margin * 2))).toFixed(3);
 
-            photo.height = Number(photo.height - (options.margin * 2)) * scale;
-            photo.width = Number(photo.width - (options.margin * 2)) * scale;
+            photo.height = (Number(photo.height) - (options.margin * 2)) * scale;
+            photo.width = (Number(photo.width) - (options.margin * 2)) * scale;
         },
         isCloser = function (a, b, goal) {
             return Math.abs(a - goal) > Math.abs(b - goal);
@@ -63,7 +63,7 @@
                     photos: []
                 };
 
-            photos.forEach(function (photo) {
+            photos.forEach(function (photo, index) {
                 // normalize dimensions
                 normalizeHeight(photo);
 
@@ -83,6 +83,11 @@
                             photo
                         ]
                     };
+                }
+
+                if (index === photos.length - 1) {
+                    // close final row
+                    rows.push(row);
                 }
             });
 
