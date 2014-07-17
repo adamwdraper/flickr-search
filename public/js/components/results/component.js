@@ -81,12 +81,14 @@ define([
                     this.collection.each(function (photo) {
                         var dimensions = photo.getDimensions();
 
-                        photos.push({
-                            src: photo.getUrl(),
-                            href: photo.getLink(),
-                            height: dimensions.height,
-                            width: dimensions.width
-                        });
+                        if (dimensions.height && dimensions.width) {
+                            photos.push({
+                                src: photo.getUrl(),
+                                href: photo.getLink(),
+                                height: dimensions.height,
+                                width: dimensions.width
+                            });
+                        }
                     });
 
                     if (this.app.get('page') === 1) {
