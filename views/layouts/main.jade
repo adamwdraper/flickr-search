@@ -1,7 +1,7 @@
 doctype 5
 html(lang="en-US")
     block vars
-        - var app = 'default'
+        - var router = 'default'
 
     head
         meta(charset="UTF-8")
@@ -14,7 +14,7 @@ html(lang="en-US")
 
         block head
 
-    body(data-appular-app="#{app}")
+    body(data-appular-router="#{router}")
 
         header 
             block header
