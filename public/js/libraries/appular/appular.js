@@ -341,6 +341,10 @@ define([
                     }
                 }, this);
 
+                this.collection.on('change', function (param) {
+                    this.navigateHash(!param.get('addToHistory'));
+                }, this);
+
                 // call original constructor
                 Router.apply(this, arguments);
             },
