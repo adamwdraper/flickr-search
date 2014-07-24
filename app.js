@@ -11,7 +11,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 // Routes ---------------------------------------
-app.get('/:data?', function (req, res) {
+app.get('/:data?*', function (req, res) {
     res.render('index', {
         environment: environment
     });

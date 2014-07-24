@@ -11,7 +11,6 @@ define([
     // Render all components when router is ready
     Backbone.on('appular:router:required', function () {
         Backbone.history.start({
-            root: window.location.pathname,
             pushState: true
         });
     });
