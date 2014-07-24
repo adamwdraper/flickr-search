@@ -1,7 +1,6 @@
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 5000,
-    fs = require('fs'),
     environment = process.env.NODE_ENV || 'production';
 
 // app.use(express.logger());
@@ -11,7 +10,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 // Routes ---------------------------------------
-app.get('/:data?', function (req, res) {
+app.get('/:data?*', function (req, res) {
     res.render('index', {
         environment: environment
     });

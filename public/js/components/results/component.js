@@ -20,10 +20,10 @@ define([
             },
             collection: new Photos(),
             listeners: {
-                'app change:keyword': 'fetchByKeyword',
-                'collection sync': 'renderResults',
-                'collection reset': 'renderResults',
-                'collection error': 'renderError',
+                'change:keyword router': 'fetchByKeyword',
+                'sync collection': 'renderResults',
+                'reset collection': 'renderResults',
+                'error collection': 'renderError',
                 'fetch': 'fetch'
             },
             events: {},
@@ -43,7 +43,7 @@ define([
                 this.plugins.infiniteScroll.trigger('pause');
 
                 // trigger render if keyword was loaded from url
-                if (this.app.get('keyword')) {
+                if (this.router.get('keyword')) {
                     this.fetchByKeyword();
                 }
 
@@ -58,11 +58,11 @@ define([
                     this.plugins.infiniteScroll.trigger('reset');
                 } else {
                     // no results
-                    if (this.app.get('page') === 1) {
-                        if (this.app.get('keyword')) {
+                    if (this.router.get('page') === 1) {
+                        if (this.router.get('keyword')) {
                             // show no results message
                             this.$container.html(noResults({
-                                keyword: this.app.get('keyword')
+                                keyword: this.router.get('keyword')
                             }));
                         } else {
                             this.$container.empty();
@@ -91,17 +91,17 @@ define([
                 this.renderLoader();
 
                 // reset page
-                this.app.set('page', 1);
+                this.router.set('page', 1);
 
                 this.trigger('fetch');
             },
             fetchByPage: function () {
-                this.app.set('page', this.app.get('page') + 1);
+                this.router.set('page', this.router.get('page') + 1);
 
                 this.trigger('fetch');
             },
             fetch: _.debounce(function () {
-                if (this.app.get('keyword')) {
+                if (this.router.get('keyword')) {
                     this.collection.fetch();
                 } else if (this.collection.length) {
                     this.collection.reset();
@@ -125,7 +125,7 @@ define([
                 });
 
                 // new set of results
-                if (this.app.get('page') === 1) {
+                if (this.router.get('page') === 1) {
                     this.$container.tiles('empty');
                 }
 
