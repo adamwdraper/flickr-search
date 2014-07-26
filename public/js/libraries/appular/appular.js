@@ -22,6 +22,8 @@ define([
         $body = $('body'),
         $window = $('window'),
         $document = $('document'),
+        router,
+        $components,
         viewOptions = [
             'model',
             'collection',
@@ -89,6 +91,17 @@ define([
 
             Backbone.trigger('appular:component:required', Appular.components[name]);
         });
+    };
+
+    Appular.initialize = function () {
+        router = $('body').data('appularRouter');
+        $components = $('[data-appular-component]');
+
+        if (router) {
+            Appular.require.router(router);
+        } else {
+            throw new Error('Appular : No router found');
+        }
     };
 
     // Extending backbone objects
@@ -448,6 +461,43 @@ define([
         interpolate: /\{\{\{([\s\S]+?)\}\}\}/g, // {{{ title }}}
         escape: /\{\{[^#\{]([\s\S]+?)[^\}]\}\}/g, // {{ title }}
     };
+
+    // set up listeners
+    // Start history to tigger first route
+    Backbone.on('appular:router:required', function (router) {
+        Backbone.history.start(router.options);
+    });
+
+    // Require all components when router is ready
+    Backbone.on('appular:data:initialized', function () {
+        _.each($components, function (element) {
+            var $element = $(element),
+                name = $element.data('appularComponent'),
+                options = {
+                    el: $element
+                };
+
+            // add any data attributes to the components options
+            _.each($element.data(), function (value, key) {
+                if (key !== 'appularComponent') {
+                    options[key] = value;
+                }
+            });
+
+            Appular.require.component(name, options);
+        });
+    });
+
+    // Render component after it is required 
+    Backbone.on('appular:component:required', function (component) {
+        component.render();
+    });
+
+    // log major libraries being used
+    Appular.log('Library', 'Appular', 'v' + Appular.version);
+    Appular.log('Library', 'jQuery', 'v' + $().jquery);
+    Appular.log('Library', 'Backbone', 'v' + Backbone.VERSION);
+    Appular.log('Library', 'Underscore', 'v' + _.VERSION);
     
     return Appular;
 });
