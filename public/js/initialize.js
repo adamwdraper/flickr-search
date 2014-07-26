@@ -8,11 +8,9 @@ define([
     var router = $('body').data('appularRouter'),
         $components = $('[data-appular-component]');
 
-    // Render all components when router is ready
-    Backbone.on('appular:router:required', function () {
-        Backbone.history.start({
-            pushState: true
-        });
+    // Start history to tigger first route
+    Backbone.on('appular:router:required', function (router) {
+        Backbone.history.start(router.options);
     });
 
     // Require all components when router is ready
