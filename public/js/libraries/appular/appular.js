@@ -484,7 +484,7 @@ define([
     // set up listeners
     // Start history to tigger first route
     Backbone.on('appular:router:required', function (router) {
-        Backbone.history.start(router.options);
+        Backbone.history.start(router.history);
     });
 
     // Require all components when router is ready

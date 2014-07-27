@@ -7,7 +7,7 @@ define([
     'backbone'
 ], function ($, _, Backbone) {
     var Router = Backbone.Router.extend({
-            options: {
+            history: {
                 pushState: true
             },
             params: {
