@@ -9,9 +9,8 @@
 
 // Styles --------------------------------------
 .ui-results {
-    margin-top: $layout-header-height;
     text-align: center;
-    padding: 1px 0;
+    padding: $layout-header-height 0;
     position: relative;
 
     .container {

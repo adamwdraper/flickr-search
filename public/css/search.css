@@ -523,9 +523,8 @@ i {
     margin: 1em 0; }
 
 .ui-results {
-  margin-top: 3rem;
   text-align: center;
-  padding: 1px 0;
+  padding: 3rem 0;
   position: relative; }
   .ui-results .container {
     font-size: 0; }
