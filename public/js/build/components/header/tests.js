@@ -1,0 +1,1 @@
+define(["jquery","underscore","backbone","./component"],function(e,t,n,r){var i;describe("Boilerplate Component",function(){describe("Construction",function(){beforeEach(function(e){var t=n.Router.extend();i=new r({router:new t}),e()}),it("Exists",function(){assert.ok(i)})})})});
