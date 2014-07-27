@@ -7,7 +7,10 @@ define([
     'backbone'
 ], function ($, _, Backbone) {
     var Router = Backbone.Router.extend({
-            data: {}
+            options: {
+                pushState: true
+            },
+            params: {}
         });
 
     return Router;

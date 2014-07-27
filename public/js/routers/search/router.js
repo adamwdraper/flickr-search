@@ -10,7 +10,7 @@ define([
             options: {
                 pushState: true
             },
-            data: {
+            params: {
                 keyword: {
                     value: '',
                     alias: 'k'
