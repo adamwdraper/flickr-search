@@ -18,10 +18,7 @@ module.exports = function(grunt) {
     fs.readdirSync(appular.paths.routers).forEach(function (name) {
         if (name[0] !== '.' && name[0] !== '_') {
             appular.routers.push({
-                name: 'routers/' + name + '/router',
-                exclude: [
-                    'initialize'
-                ]
+                name: 'routers/' + name + '/router'
             });
         }
     });
@@ -30,10 +27,7 @@ module.exports = function(grunt) {
     fs.readdirSync(appular.paths.components).forEach(function (name) {
         if (name[0] !== '.' && name[0] !== '_') {
             appular.components.push({
-                name: 'components/' + name + '/component',
-                exclude: [
-                    'initialize'
-                ]
+                name: 'components/' + name + '/component'
             });
         }
     });
@@ -117,6 +111,7 @@ module.exports = function(grunt) {
                 noarg: true,
                 sub: true,
                 expr: true,
+                es5: true,
                 globals: {
                     define: false,
                     describe: false,
@@ -167,7 +162,7 @@ module.exports = function(grunt) {
                     },
                     modules: [
                         {
-                            name: 'initialize',
+                            name: 'libraries/require/require',
                             include: [
                                 'modernizr',
                                 'libraries/require/require',
@@ -178,8 +173,7 @@ module.exports = function(grunt) {
                                 'jqueryFunctions',
                                 'backboneStickit',
                                 'domReady',
-                                'text',
-                                'initialize'
+                                'text'
                             ].concat(appular.plugins, appular.utilities)
                         }
                     ].concat(appular.routers, appular.components),

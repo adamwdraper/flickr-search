@@ -1,0 +1,1 @@
+define(["jquery","underscore","backbone","./router"],function(e,t,n,r){var i=new r;describe("Search Router",function(){describe("Router",function(){it("Exists",function(){assert.ok(i),expect(i).to.be.instanceOf(Object)})})})});

@@ -2,15 +2,15 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    './app'
-], function ($, _, Backbone, App) {
-    var app = new App();
+    './router'
+], function ($, _, Backbone, Router) {
+    var router = new Router();
 
-    describe('Boilerplate App', function () {
-        describe('App', function () {
+    describe('Search Router', function () {
+        describe('Router', function () {
             it('Exists', function () {
-                assert.ok(app);
-                expect(app).to.be.instanceOf(Backbone.App);
+                assert.ok(router);
+                expect(router).to.be.instanceOf(Object);
             });
         });
     });
