@@ -58,42 +58,63 @@ define([
         }
     };
 
-    Appular.require = {};
+    Appular.initialize = {
+        components: function () {
+            _.each($components, function (element) {
+                var $element = $(element),
+                    name = $element.data('appularComponent'),
+                    options = {
+                        el: $element
+                    };
 
-    Appular.require.router = function (name) {
-        var path = 'routers/' + name + '/router';
+                // add any data attributes to the components options
+                _.each($element.data(), function (value, key) {
+                    if (key !== 'appularComponent') {
+                        options[key] = value;
+                    }
+                });
 
-        require([
-            path
-        ], function (Router) {
-            // log load in dev
-            Appular.log('Router', name, path);
+                Appular.require.component(name, options);
+            });
+        }
+    };
 
-            Appular.router = new Router();
+    Appular.require = {
+        router: function (name) {
+            var path = 'routers/' + name + '/router';
 
-            Backbone.trigger('appular:router:required', Appular.router);
-        });
+            require([
+                path
+            ], function (Router) {
+                // log load in dev
+                Appular.log('Router', name, path);
+
+                Appular.router = new Router();
+
+                Backbone.trigger('appular:router:required', Appular.router);
+            });
+        },
+        component: function (name, options) {
+            var path = 'components/' + name + '/component';
+
+            options = options || {};
+
+            options.router = Appular.router;
+
+            require([
+                path
+            ], function (Component) {
+                Appular.log('Component', name, path);
+
+                Appular.components[name] = new Component(options);
+
+                Backbone.trigger('appular:component:required', Appular.components[name]);
+            });
+        }
     };
     
-    Appular.require.component = function (name, options) {
-        var path = 'components/' + name + '/component';
-
-        options = options || {};
-
-        options.router = Appular.router;
-
-        require([
-            path
-        ], function (Component) {
-            Appular.log('Component', name, path);
-
-            Appular.components[name] = new Component(options);
-
-            Backbone.trigger('appular:component:required', Appular.components[name]);
-        });
-    };
-
-    Appular.initialize = function () {
+    // Kick it all off by finding the router and components
+    Appular.render = function () {
         router = $('body').data('appularRouter');
         $components = $('[data-appular-component]');
 
@@ -470,22 +491,7 @@ define([
 
     // Require all components when router is ready
     Backbone.on('appular:data:initialized', function () {
-        _.each($components, function (element) {
-            var $element = $(element),
-                name = $element.data('appularComponent'),
-                options = {
-                    el: $element
-                };
-
-            // add any data attributes to the components options
-            _.each($element.data(), function (value, key) {
-                if (key !== 'appularComponent') {
-                    options[key] = value;
-                }
-            });
-
-            Appular.require.component(name, options);
-        });
+        Appular.initialize.components();
     });
 
     // Render component after it is required 

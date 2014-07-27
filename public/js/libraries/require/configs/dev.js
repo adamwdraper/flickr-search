@@ -38,7 +38,7 @@ requirejs.config({
             'domReady!',
             'appular'
         ], function (doc, Appular) {
-            Appular.initialize();
+            Appular.render();
         });
     }
 });
