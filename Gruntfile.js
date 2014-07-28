@@ -18,7 +18,10 @@ module.exports = function(grunt) {
     fs.readdirSync(appular.paths.routers).forEach(function (name) {
         if (name[0] !== '.' && name[0] !== '_') {
             appular.routers.push({
-                name: 'routers/' + name + '/router'
+                name: 'routers/' + name + '/router',
+                exclude: [
+                    'libraries/require/require'
+                ]
             });
         }
     });
@@ -27,7 +30,10 @@ module.exports = function(grunt) {
     fs.readdirSync(appular.paths.components).forEach(function (name) {
         if (name[0] !== '.' && name[0] !== '_') {
             appular.components.push({
-                name: 'components/' + name + '/component'
+                name: 'components/' + name + '/component',
+                exclude: [
+                    'libraries/require/require'
+                ]
             });
         }
     });

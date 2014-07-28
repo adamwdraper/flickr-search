@@ -24,29 +24,15 @@ utilities/flickr/utility.js
 
 routers/search/router.js
 ----------------
-libraries/underscore/underscore.js
-libraries/backbone/backbone.js
 routers/search/router.js
 
 components/header/component.js
 ----------------
-libraries/underscore/underscore.js
-libraries/backbone/backbone.js
 components/header/component.js
 
 components/results/component.js
 ----------------
-libraries/underscore/underscore.js
-libraries/backbone/backbone.js
-libraries/require/plugins/template.js
-libraries/require/plugins/text.js
-text!plugins/infinite-scroll/loader.html
-template!plugins/infinite-scroll/loader.html
-text!plugins/infinite-scroll/end.html
-template!plugins/infinite-scroll/end.html
-plugins/infinite-scroll/plugin.js
 libraries/jquery/plugins/tiles.js
-utilities/flickr/utility.js
 components/results/photo.js
 components/results/photos.js
 text!components/results/loader.html
