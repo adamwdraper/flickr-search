@@ -1,0 +1,1 @@
+define("routers/search/router",["jquery","underscore","backbone"],function(e,t,n){var r=n.Router.extend({history:{pushState:!0},params:{keyword:{value:"",alias:"k"},page:{value:1,alias:"p",type:"number"}}});return r});

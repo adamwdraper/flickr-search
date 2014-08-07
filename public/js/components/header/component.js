@@ -14,7 +14,7 @@ define([
             events: {},
             initialize: function () {},
             render: function () {
-                this.stickit(this.app.get('keyword', {
+                this.stickit(this.router.get('keyword', {
                     model: true
                 }));
 

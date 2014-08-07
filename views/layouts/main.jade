@@ -1,7 +1,7 @@
 doctype 5
 html(lang="en-US")
     block vars
-        - var app = 'default'
+        - var router = 'default'
 
     head
         meta(charset="UTF-8")
@@ -14,7 +14,7 @@ html(lang="en-US")
 
         block head
 
-    body(data-appular-app="#{app}")
+    body(data-appular-router="#{router}")
 
         header 
             block header
@@ -28,4 +28,4 @@ html(lang="en-US")
             - if (environment === 'development')
                 script(src="/js/libraries/require/require.js", data-main="/js/libraries/require/configs/dev")
             - else
-                script(src="/js/build/initialize.js")
+                script(src="/js/build/libraries/require/require.js")

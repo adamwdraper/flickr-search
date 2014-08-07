@@ -1,15 +1,15 @@
 
-initialize.js
+libraries/require/require.js
 ----------------
 libraries/require/require.js
+libraries/modernizr/modernizr.js
 libraries/require/plugins/domReady.js
 domReady!
 libraries/underscore/underscore.js
 libraries/backbone/backbone.js
 utilities/cookies/utility.js
+utilities/storage/utility.js
 libraries/appular/appular.js
-initialize.js
-libraries/modernizr/modernizr.js
 libraries/require/configs/build.js
 libraries/jquery/extensions/functions.js
 libraries/backbone/extensions/stickit.js
@@ -22,9 +22,9 @@ template!plugins/infinite-scroll/end.html
 plugins/infinite-scroll/plugin.js
 utilities/flickr/utility.js
 
-apps/search/app.js
+routers/search/router.js
 ----------------
-apps/search/app.js
+routers/search/router.js
 
 components/header/component.js
 ----------------

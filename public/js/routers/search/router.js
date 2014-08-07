@@ -6,7 +6,10 @@ define([
     'underscore',
     'backbone'
 ], function ($, _, Backbone) {
-    var App = Backbone.App.extend({
+    var Router = Backbone.Router.extend({
+            history: {
+                pushState: true
+            },
             params: {
                 keyword: {
                     value: '',
@@ -17,14 +20,8 @@ define([
                     alias: 'p',
                     type: 'number'
                 }
-            },
-            initialize: function () {},
-            render: function () {
-                Backbone.trigger('appular:app:rendered');
-
-                return this;
             }
         });
 
-    return App;
+    return Router;
 });

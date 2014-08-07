@@ -1,0 +1,1 @@
+define(["jquery","underscore","backbone"],function(e,t,n){var r=n.Router.extend({history:{pushState:!0},params:{}});return r});

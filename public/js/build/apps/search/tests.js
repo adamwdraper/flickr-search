@@ -1,1 +1,0 @@
-define(["jquery","underscore","backbone","./app"],function(e,t,n,r){var i=new r;describe("Boilerplate App",function(){describe("App",function(){it("Exists",function(){assert.ok(i),expect(i).to.be.instanceOf(n.App)})})})});

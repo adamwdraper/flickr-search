@@ -1,10 +1,10 @@
 /**
- * Tiles - jQuery Plugin
+ * Tiles - jQuery Plugin for row gridded images
  *
  * Version: 0.0.1 (5/25/2012)
  * Requires: jQuery v1.7+
  *
- * Copyright (c) 2011 User - http://github.com/username
+ * Copyright (c) 2011 User - http://github.com/adamwdraper
  * Under MIT and GPL licenses:
  *  http://www.opensource.org/licenses/mit-license.php
  *  http://www.gnu.org/licenses/gpl.html
@@ -26,10 +26,10 @@
         photos = [],
         normalizeHeight = function (photo) {
             var height = options.imageHeight,
-                scale = (height/(Number(photo.height) + (options.margin * 2))).toFixed(3);
+                scale = height/(Number(photo.height)).toFixed(3);
 
-            photo.height = (Number(photo.height) - (options.margin * 2)) * scale;
-            photo.width = (Number(photo.width) - (options.margin * 2)) * scale;
+            photo.height = Number(photo.height) * scale;
+            photo.width = Number(photo.width) * scale;
         },
         isCloser = function (a, b, goal) {
             return Math.abs(a - goal) > Math.abs(b - goal);
@@ -103,7 +103,7 @@
             
             rowsToRender.forEach(function (row) {
                 // find out scale for row
-                var scale = containerWidth/row.width;
+                var scale = (containerWidth - (options.margin * row.photos.length * 2))/row.width;
 
                 row.photos.forEach(function (photo) {
                     var $a = $('<a></a>'),
@@ -113,8 +113,8 @@
                     if (options.margin) {
                         $image.css('margin', options.margin + 'px');
                     }
-                    $image.width(Math.floor((photo.width - (options.margin * 2)) * scale));
-                    $image.height(Math.floor((photo.height - (options.margin * 2)) * scale));
+                    $image.width(Math.floor(photo.width * scale));
+                    $image.height(Math.floor(photo.height * scale));
 
                     $image.on('load', function () {
                         $(this).addClass('loaded');
